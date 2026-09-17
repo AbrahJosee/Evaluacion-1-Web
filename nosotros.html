@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros · Lumina Home</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="bulb"></span>Lumina Home</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html" class="active">Nosotros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a href="carrito.html" class="icon-link"><span class="carrito-icon"></span>Carrito<span class="carrito-badge">0</span></a>
+      <button class="nav-toggle" aria-label="Abrir menú"><span class="menu-icon"></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="page-header">
+      <h1>Nosotros</h1>
+      <p>Diseño e iluminación con propósito.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="ph-img tone-hero ratio-4-3"></div>
+      <div>
+        <h2>Quiénes somos</h2>
+        <p>Lumina Home nació de la idea de que la luz correcta transforma un espacio. Somos una tienda boutique especializada en lámparas inteligentes, iluminación LED minimalista y objetos decorativos, pensada para arquitectos, diseñadores de interiores y quienes recién arman su primer hogar.</p>
+        <p>Seleccionamos cada pieza cuidando estética, eficiencia energética y facilidad de instalación, para que decorar con luz sea simple y se vea siempre profesional.</p>
+      </div>
+    </div>
+
+    <div class="section-title"><h2>Cómo trabajamos</h2></div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="ph-img tone-hero ratio-1-1"></div>
+        <h4>Diseño</h4>
+        <span>Seleccionamos cada pieza cuidando estética, materiales y eficiencia energética.</span>
+      </div>
+      <div class="team-card">
+        <div class="ph-img tone-smart ratio-1-1"></div>
+        <h4>Producto</h4>
+        <span>Evaluamos calidad y facilidad de instalación antes de sumar algo al catálogo.</span>
+      </div>
+      <div class="team-card">
+        <div class="ph-img tone-adornos ratio-1-1"></div>
+        <h4>Atención al cliente</h4>
+        <span>Te acompañamos en la compra y en el despacho de tus productos.</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">© 2026 Lumina Home. Proyecto académico DSY1104 — Evaluación 1.</div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/tienda.js"></script>
+<script>
+  const recuadros = document.querySelectorAll(".ph-img");
+  recuadros.forEach(function (el) {
+    el.innerHTML = ICON_BULB;
+  });
+</script>
+</body>
+</html>

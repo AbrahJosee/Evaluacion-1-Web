@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina Home · Iluminación y decoración de interiores</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="bulb"></span>Lumina Home</a>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a href="carrito.html" class="icon-link"><span class="carrito-icon"></span>Carrito<span class="carrito-badge">0</span></a>
+      <button class="nav-toggle" aria-label="Abrir menú"><span class="menu-icon"></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container top-utility">
+    <a href="login.html">Iniciar sesión</a> | <a href="registro.html">Registrar usuario</a>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-copy">
+        <span class="eyebrow">Tienda online</span>
+        <h1>Ilumina cada rincón de tu hogar</h1>
+        <p>Lámparas inteligentes, iluminación LED minimalista y objetos decorativos, pensados por diseñadores para arquitectos, decoradores y amantes del buen diseño.</p>
+        <a href="productos.html" class="btn btn-primary">Ver productos</a>
+      </div>
+      <div id="hero-img"></div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="section-title"><h2>Explora por categoría</h2></div>
+    <div class="category-strip" id="category-strip"></div>
+
+    <div class="section-title">
+      <h2>Productos destacados</h2>
+      <a href="productos.html">Ver todo el catálogo →</a>
+    </div>
+    <div class="product-grid" id="grid-destacados"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand"><span class="bulb"></span>Lumina Home</div>
+      <p>Tienda boutique de diseño de interiores: lámparas inteligentes, iluminación LED minimalista y objetos decorativos para el hogar.</p>
+    </div>
+    <div>
+      <h4>Categorías</h4>
+      <ul>
+        <li><a href="productos.html">Lámparas de Techo</a></li>
+        <li><a href="productos.html">Iluminación Smart</a></li>
+        <li><a href="productos.html">Iluminación Exterior</a></li>
+        <li><a href="productos.html">Adornos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Mantente al día</h4>
+      <p>Recibe tendencias de iluminación y ofertas exclusivas.</p>
+      <form class="newsletter" onsubmit="event.preventDefault(); showToast('¡Gracias por suscribirte!');">
+        <input type="email" placeholder="tu@correo.com" required>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Lumina Home.</div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/tienda.js"></script>
+<script>
+  document.getElementById("hero-img").outerHTML = phImg("hero", "ratio-4-3");
+
+  let htmlCategorias = "";
+  for (let i = 0; i < CATEGORIAS.length; i++) {
+    const c = CATEGORIAS[i];
+    htmlCategorias += '<a class="category-card" href="productos.html?cat=' + c.id + '">';
+    htmlCategorias += phImg(c.id, "ratio-4-3");
+    htmlCategorias += c.nombre + '</a>';
+  }
+  document.getElementById("category-strip").innerHTML = htmlCategorias;
+
+  const destacados = [];
+  for (let i = 0; i < PRODUCTOS.length && i < 8; i++) {
+    destacados.push(PRODUCTOS[i]);
+  }
+  renderGrid("grid-destacados", destacados);
+</script>
+</body>
+</html>
+
