@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalle de blog · Lumina Home</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="bulb"></span>Lumina Home</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html" class="active">Blogs</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a href="carrito.html" class="icon-link"><span class="carrito-icon"></span>Carrito<span class="carrito-badge">0</span></a>
+      <button class="nav-toggle" aria-label="Abrir menú"><span class="menu-icon"></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container" id="detalle-blog"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">© 2026 Lumina Home.</div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/tienda.js"></script>
+<script>
+  renderDetalleBlog();
+</script>
+</body>
+</html>

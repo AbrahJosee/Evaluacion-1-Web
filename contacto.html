@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto · Lumina Home</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="bulb"></span>Lumina Home</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contacto.html" class="active">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a href="carrito.html" class="icon-link"><span class="carrito-icon"></span>Carrito<span class="carrito-badge">0</span></a>
+      <button class="nav-toggle" aria-label="Abrir menú"><span class="menu-icon"></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="page-header"><h1>Contacto</h1><p>¿Tienes dudas sobre un producto o tu despacho? Escríbenos.</p></div>
+
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h2>Conversemos</h2>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg> Av. Providencia 1234, local 5, Providencia, Santiago</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg> contacto@luminahome.cl</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a2 2 0 0 1-2 2C9.6 22 2 14.4 2 6a2 2 0 0 1 2-2Z"/></svg> +56 2 2345 6789</li>
+        </ul>
+      </div>
+
+      <form id="form-contacto" class="form-card" novalidate>
+        <h2>Formulario de contacto</h2>
+        <div class="form-feedback"></div>
+
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" maxlength="100">
+          <span class="error-msg"></span>
+        </div>
+
+        <div class="field">
+          <label for="correo">Correo</label>
+          <input type="email" id="correo" name="correo" maxlength="100" placeholder="tunombre@gmail.com">
+          <span class="hint">Solo correos @duoc.cl, @profesor.duoc.cl o @gmail.com.</span>
+          <span class="error-msg"></span>
+        </div>
+
+        <div class="field">
+          <label for="comentario">Comentario</label>
+          <textarea id="comentario" name="comentario" maxlength="500" placeholder="Cuéntanos en qué te ayudamos"></textarea>
+          <span class="error-msg"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">© 2026 Lumina Home.</div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/tienda.js"></script>
+<script>
+
+  const formContacto = document.getElementById("form-contacto");
+
+  function validarNombreContacto() {
+    if (formContacto.nombre.value.trim() === "") {
+      mostrarError(formContacto.nombre, "Este campo es obligatorio.");
+      return false;
+    }
+    limpiarError(formContacto.nombre);
+    return true;
+  }
+
+  function validarCorreoContacto() {
+    if (formContacto.correo.value.trim() === "") {
+      mostrarError(formContacto.correo, "Este campo es obligatorio.");
+      return false;
+    }
+    if (!esCorreoPermitido(formContacto.correo.value)) {
+      mostrarError(formContacto.correo, "Usa un correo @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+      return false;
+    }
+    limpiarError(formContacto.correo);
+    return true;
+  }
+
+  function validarComentario() {
+    if (formContacto.comentario.value.trim() === "") {
+      mostrarError(formContacto.comentario, "Este campo es obligatorio.");
+      return false;
+    }
+    limpiarError(formContacto.comentario);
+    return true;
+  }
+
+  formContacto.nombre.addEventListener("blur", validarNombreContacto);
+  formContacto.correo.addEventListener("blur", validarCorreoContacto);
+  formContacto.comentario.addEventListener("blur", validarComentario);
+
+  formContacto.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let ok = true;
+    if (!validarNombreContacto()) ok = false;
+    if (!validarCorreoContacto()) ok = false;
+    if (!validarComentario()) ok = false;
+
+    if (ok) {
+      mostrarFeedback(formContacto, true);
+      formContacto.reset();
+    } else {
+      mostrarFeedback(formContacto, false);
+    }
+  });
+</script>
+</body>
+</html>
