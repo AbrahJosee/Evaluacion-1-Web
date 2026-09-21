@@ -12,6 +12,26 @@ function phImg(tone, ratio) {
   return '<div class="ph-img tone-' + tone + ' ' + ratio + '">' + ICON_BULB + '</div>';
 }
 
+function productoImg(p, ratio) {
+  if (!ratio) {
+    ratio = "ratio-4-3";
+  }
+  if (p.imagen) {
+    return '<div class="ph-img ' + ratio + '"><img src="' + p.imagen + '" alt="' + p.nombre + '"></div>';
+  }
+  return phImg(p.categoria, ratio);
+}
+
+function blogImg(b, ratio) {
+  if (!ratio) {
+    ratio = "ratio-4-3";
+  }
+  if (b.imagen) {
+    return '<div class="ph-img ' + ratio + '"><img src="' + b.imagen + '" alt="' + b.titulo + '"></div>';
+  }
+  return phImg("blog", ratio);
+}
+
 function initNavToggle() {
   var btn = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".main-nav");
@@ -174,16 +194,12 @@ function actualizarBadgeCarrito() {
 document.addEventListener("DOMContentLoaded", actualizarBadgeCarrito);
 
 function renderProductCard(p) {
-  const bajoStock = p.stock <= p.stockCritico;
   let html = '<div class="product-card">';
-  html += '<a class="thumb-link" href="producto-detalle.html?codigo=' + p.codigo + '">' + phImg(p.categoria) + '</a>';
+  html += '<a class="thumb-link" href="producto-detalle.html?codigo=' + p.codigo + '">' + productoImg(p) + '</a>';
   html += '<div class="info">';
   html += '<span class="cat">' + obtenerNombreCategoria(p.categoria) + '</span>';
   html += '<h3><a href="producto-detalle.html?codigo=' + p.codigo + '">' + p.nombre + '</a></h3>';
   html += '<span class="price">' + formatCLP(p.precio) + '</span>';
-  if (bajoStock) {
-    html += '<span class="stock-low">¡Últimas unidades!</span>';
-  }
   html += '<button class="btn btn-primary btn-sm btn-block" type="button" data-add="' + p.codigo + '">Añadir</button>';
   html += '</div></div>';
   return html;
@@ -263,11 +279,11 @@ function renderDetalleProducto() {
   const bajoStock = producto.stock <= producto.stockCritico;
 
   let html = '<div class="pd-gallery">';
-  html += '<div class="pd-gallery-main">' + phImg(producto.categoria, "ratio-1-1") + '</div>';
+  html += '<div class="pd-gallery-main">' + productoImg(producto, "ratio-1-1") + '</div>';
   html += '<div class="pd-thumbs">';
-  html += phImg(producto.categoria).replace('class="ph-img', 'class="ph-img active');
-  html += phImg(producto.categoria);
-  html += phImg(producto.categoria);
+  html += productoImg(producto).replace('class="ph-img', 'class="ph-img active');
+  html += productoImg(producto);
+  html += productoImg(producto);
   html += '</div></div>';
 
   html += '<div class="pd-info">';
@@ -328,7 +344,7 @@ function renderListaBlogs(containerId) {
   for (let i = 0; i < BLOGS.length; i++) {
     const b = BLOGS[i];
     html += '<article class="blog-row">';
-    html += phImg("blog", "ratio-4-3");
+    html += blogImg(b, "ratio-4-3");
     html += '<div><h3>' + b.titulo + '</h3>';
     html += '<p>' + b.resumen + '</p>';
     html += '<a class="btn btn-outline btn-sm" href="blog-detalle.html?id=' + b.id + '">Ver caso</a>';
@@ -357,7 +373,7 @@ function renderDetalleBlog() {
     parrafos += "<p>" + blog.cuerpo[i] + "</p>";
   }
 
-  let html = '<div class="blog-detail-hero">' + phImg("blog", "ratio-16-9") + '</div>';
+  let html = '<div class="blog-detail-hero">' + blogImg(blog, "ratio-16-9") + '</div>';
   html += '<div class="blog-detail-body">';
   html += '<p class="blog-meta"><a href="blogs.html">Blogs</a> · Lumina Home</p>';
   html += '<h1>' + blog.titulo + '</h1>';
@@ -499,4 +515,3 @@ function mostrarFeedback(form, ok, mensajeOk, mensajeError) {
     feedback.className = "form-feedback show fail";
   }
 }
-

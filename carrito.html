@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi carrito · Lumina Home</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="bulb"></span>Lumina Home</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a href="carrito.html" class="icon-link"><span class="carrito-icon"></span>Carrito<span class="carrito-badge">0</span></a>
+      <button class="nav-toggle" aria-label="Abrir menú"><span class="menu-icon"></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="page-header"><h1>Mi carrito de compras</h1></div>
+    <div id="carrito-vacio" class="carrito-vacio-msg" hidden>
+      <p>Tu carrito está vacío.</p>
+      <a class="btn btn-primary" href="productos.html">Ir a productos</a>
+    </div>
+    <div class="carrito-layout" id="carrito-layout" hidden>
+      <div class="carrito-items" id="carrito-items"></div>
+      <aside class="carrito-summary">
+        <h3>Resumen</h3>
+        <div class="summary-row"><span>Subtotal</span><span id="sum-subtotal">$0</span></div>
+        <div class="summary-row"><span>Despacho</span><span>A calcular en pago</span></div>
+        <div class="summary-total"><span>Total</span><span id="sum-total">$0</span></div>
+        <div class="coupon-row">
+          <input type="text" placeholder="Ingrese el cupón de descuento">
+          <button class="btn btn-outline btn-sm" type="button" onclick="showToast('Cupón no válido en esta demo')">Aplicar</button>
+        </div>
+        <button class="btn btn-primary btn-block" type="button" onclick="showToast('Pago simulado: ¡gracias por tu compra!')">Pagar</button>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand"><span class="bulb"></span>Lumina Home</div>
+      <p>Tienda boutique de diseño de interiores: lámparas inteligentes, iluminación LED minimalista y objetos decorativos para el hogar.</p>
+    </div>
+    <div>
+      <h4>Categorías</h4>
+      <ul>
+        <li><a href="productos.html?cat=techo">Lámparas de Techo</a></li>
+        <li><a href="productos.html?cat=smart">Iluminación Smart</a></li>
+        <li><a href="productos.html?cat=exterior">Iluminación Exterior</a></li>
+        <li><a href="productos.html?cat=adornos">Adornos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Mantente al día</h4>
+      <p>Recibe tendencias de iluminación y ofertas exclusivas.</p>
+      <form class="newsletter" onsubmit="event.preventDefault(); showToast('¡Gracias por suscribirte!');">
+        <input type="email" placeholder="tu@correo.com" required>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Lumina Home.</div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/tienda.js"></script>
+<script>
+
+  function buscarLinea(lineas, codigo) {
+    for (let i = 0; i < lineas.length; i++) {
+      if (lineas[i].codigo === codigo) {
+        return lineas[i];
+      }
+    }
+    return null;
+  }
+
+  function renderCarrito() {
+    const lineas = detalleCarrito();
+    document.getElementById("carrito-vacio").hidden = lineas.length > 0;
+    document.getElementById("carrito-layout").hidden = lineas.length === 0;
+    if (lineas.length === 0) {
+      return;
+    }
+
+    let htmlItems = "";
+    for (let i = 0; i < lineas.length; i++) {
+      const l = lineas[i];
+      htmlItems += '<div class="carrito-item">';
+      htmlItems += productoImg(l.producto, "ratio-1-1");
+      htmlItems += '<div><h4>' + l.producto.nombre + '</h4>';
+      htmlItems += '<span class="unit-price">' + formatCLP(l.producto.precio) + ' c/u</span>';
+      htmlItems += '<div class="line-actions"><div class="qty-control">';
+      htmlItems += '<button type="button" data-menos="' + l.codigo + '">−</button>';
+      htmlItems += '<input type="number" min="1" value="' + l.cantidad + '" data-qty="' + l.codigo + '">';
+      htmlItems += '<button type="button" data-mas="' + l.codigo + '">+</button>';
+      htmlItems += '</div>';
+      htmlItems += '<button type="button" class="remove-link" data-quitar="' + l.codigo + '">Eliminar</button>';
+      htmlItems += '</div></div>';
+      htmlItems += '<div class="line-price">' + formatCLP(l.producto.precio * l.cantidad) + '</div>';
+      htmlItems += '</div>';
+    }
+    document.getElementById("carrito-items").innerHTML = htmlItems;
+
+    document.getElementById("sum-subtotal").textContent = formatCLP(subtotalCarrito());
+    document.getElementById("sum-total").textContent = formatCLP(subtotalCarrito());
+
+    const botonesMas = document.querySelectorAll("[data-mas]");
+    botonesMas.forEach(function (b) {
+      b.addEventListener("click", function () {
+        const l = buscarLinea(detalleCarrito(), b.dataset.mas);
+        const nuevaCantidad = Math.min(l.producto.stock, l.cantidad + 1);
+        actualizarCantidadCarrito(b.dataset.mas, nuevaCantidad);
+        renderCarrito();
+      });
+    });
+
+    const botonesMenos = document.querySelectorAll("[data-menos]");
+    botonesMenos.forEach(function (b) {
+      b.addEventListener("click", function () {
+        const l = buscarLinea(detalleCarrito(), b.dataset.menos);
+        actualizarCantidadCarrito(b.dataset.menos, l.cantidad - 1);
+        renderCarrito();
+      });
+    });
+
+    const inputsCantidad = document.querySelectorAll("[data-qty]");
+    inputsCantidad.forEach(function (inp) {
+      inp.addEventListener("change", function () {
+        let cantidad = Number(inp.value);
+        if (!cantidad || cantidad < 1) {
+          cantidad = 1;
+        }
+        actualizarCantidadCarrito(inp.dataset.qty, cantidad);
+        renderCarrito();
+      });
+    });
+
+    const botonesQuitar = document.querySelectorAll("[data-quitar]");
+    botonesQuitar.forEach(function (b) {
+      b.addEventListener("click", function () {
+        quitarDelCarrito(b.dataset.quitar);
+        renderCarrito();
+      });
+    });
+  }
+
+  renderCarrito();
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iniciar sesión · Lumina Home</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="bulb"></span>Lumina Home</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="productos.html">Productos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a href="carrito.html" class="icon-link"><span class="carrito-icon"></span>Carrito<span class="carrito-badge">0</span></a>
+      <button class="nav-toggle" aria-label="Abrir menú"><span class="menu-icon"></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="auth-page">
+  <div class="container">
+    <div class="auth-logo">
+      <div class="ph-img tone-hero"></div>
+      <span>Lumina Home</span>
+    </div>
+    <form id="form-login" class="form-card" novalidate>
+      <h2>Inicio de sesión</h2>
+      <div class="form-feedback"></div>
+
+      <div class="field">
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" name="correo" maxlength="100" placeholder="tunombre@gmail.com">
+        <span class="hint">Solo correos @duoc.cl, @profesor.duoc.cl o @gmail.com.</span>
+        <span class="error-msg"></span>
+      </div>
+
+      <div class="field">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" placeholder="4 a 10 caracteres">
+        <span class="error-msg"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+      <p class="form-foot">¿Aún no tienes cuenta? <a href="registro.html">Regístrate</a></p>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">© 2026 Lumina Home.</div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/tienda.js"></script>
+<script>
+  document.querySelector(".auth-logo .ph-img").innerHTML = ICON_BULB;
+
+  const formLogin = document.getElementById("form-login");
+
+  function validarCorreoLogin() {
+    if (formLogin.correo.value.trim() === "") {
+      mostrarError(formLogin.correo, "Este campo es obligatorio.");
+      return false;
+    }
+    if (!esCorreoPermitido(formLogin.correo.value)) {
+      mostrarError(formLogin.correo, "Usa un correo @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+      return false;
+    }
+    limpiarError(formLogin.correo);
+    return true;
+  }
+
+  function validarPasswordLogin() {
+    if (!esPasswordValida(formLogin.password.value)) {
+      mostrarError(formLogin.password, "La contraseña debe tener entre 4 y 10 caracteres.");
+      return false;
+    }
+    limpiarError(formLogin.password);
+    return true;
+  }
+
+  formLogin.correo.addEventListener("blur", validarCorreoLogin);
+  formLogin.password.addEventListener("blur", validarPasswordLogin);
+
+  formLogin.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let ok = true;
+    if (!validarCorreoLogin()) ok = false;
+    if (!validarPasswordLogin()) ok = false;
+
+    if (!ok) {
+      mostrarFeedback(formLogin, false);
+      return;
+    }
+
+    const usuario = buscarUsuarioPorCredenciales(formLogin.correo.value, formLogin.password.value);
+    if (!usuario) {
+      mostrarError(formLogin.password, "Correo o contraseña incorrectos.");
+      mostrarFeedback(formLogin, false, null, "Correo o contraseña incorrectos.");
+      return;
+    }
+
+    mostrarFeedback(formLogin, true);
+    const destino = (usuario.tipoUsuario === "administrador" || usuario.tipoUsuario === "vendedor") ? "admin/index.html" : "index.html";
+    setTimeout(function () { location.href = destino; }, 1000);
+  });
+</script>
+</body>
+</html>
