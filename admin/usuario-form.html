@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usuario · Panel administrador</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="admin-body">
+<div class="admin-shell">
+
+  <aside class="admin-sidebar">
+    <div class="brand"><span class="bulb"></span>Lumina Home</div>
+    <nav class="admin-nav">
+      <a href="index.html"><span class="ic-dash"></span>Dashboard</a>
+      <a href="productos.html"><span class="ic-box"></span>Productos</a>
+      <a href="usuarios.html" class="active"><span class="ic-users"></span>Usuarios</a>
+      <div class="divider"></div>
+      <a href="../index.html"><span class="ic-store"></span>Volver a la tienda</a>
+    </nav>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar"><h1 id="titulo-form">Nuevo usuario</h1></header>
+    <div class="admin-content">
+      <form id="form-usuario" class="admin-form-card" novalidate>
+        <input type="hidden" name="runOriginal">
+        <div class="form-feedback"></div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="run">RUN</label>
+            <input type="text" id="run" name="run" placeholder="Ej: 19011029K">
+            <span class="hint">Sin puntos ni guion. Entre 7 y 9 caracteres.</span>
+            <span class="error-msg"></span>
+          </div>
+          <div class="field">
+            <label for="tipoUsuario">Tipo de usuario</label>
+            <select id="tipoUsuario" name="tipoUsuario">
+              <option value="">-- Seleccione perfil --</option>
+              <option value="administrador">Administrador</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="cliente">Cliente</option>
+            </select>
+            <span class="error-msg"></span>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" maxlength="50">
+            <span class="error-msg"></span>
+          </div>
+          <div class="field">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" maxlength="100">
+            <span class="error-msg"></span>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="correo" maxlength="100" placeholder="tunombre@gmail.com">
+            <span class="hint">Solo @duoc.cl, @profesor.duoc.cl o @gmail.com.</span>
+            <span class="error-msg"></span>
+          </div>
+          <div class="field">
+            <label for="fechaNacimiento">Fecha de nacimiento (opcional)</label>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+            <span class="error-msg"></span>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="region">Región</label>
+            <select id="region" name="region">
+              <option value="">-- Seleccione la región --</option>
+            </select>
+            <span class="error-msg"></span>
+          </div>
+          <div class="field">
+            <label for="comuna">Comuna</label>
+            <select id="comuna" name="comuna" disabled>
+              <option value="">-- Seleccione la comuna --</option>
+            </select>
+            <span class="error-msg"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" maxlength="300" placeholder="Calle, número, depto/casa">
+          <span class="hint">Requerida para el despacho de productos frágiles a todo Chile. Máximo 300 caracteres.</span>
+          <span class="error-msg"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Guardar usuario</button>
+          <a class="btn btn-outline" href="usuarios.html">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../js/datos.js"></script>
+<script src="../js/tienda.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+  document.querySelector(".brand .bulb").innerHTML = ICON_BULB;
+  document.querySelector(".ic-dash").innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/></svg>';
+  document.querySelector(".ic-box").innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v9l9 5 9-5V8"/><path d="M12 13v9"/></svg>';
+  document.querySelector(".ic-users").innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.5 13.3c2.8.3 4.8 2.5 5 5.7"/></svg>';
+  document.querySelector(".ic-store").innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10v10h16V10"/><path d="M2 6h20l-1.5 4.5a2.3 2.3 0 0 1-4.4.2 2.3 2.3 0 0 1-4.4 0 2.3 2.3 0 0 1-4.4 0 2.3 2.3 0 0 1-4.4-.2Z"/></svg>';
+
+  const form = document.getElementById("form-usuario");
+  const runEdit = new URLSearchParams(location.search).get("run");
+  const esEdicion = !!runEdit;
+
+  let usuarioExistente = null;
+  if (esEdicion) {
+    const usuariosExistentes = obtenerUsuariosAdmin();
+    for (let i = 0; i < usuariosExistentes.length; i++) {
+      if (usuariosExistentes[i].run === runEdit) {
+        usuarioExistente = usuariosExistentes[i];
+        break;
+      }
+    }
+  }
+
+  initSelectorRegionComuna("region", "comuna", usuarioExistente || null);
+
+  if (usuarioExistente) {
+    document.getElementById("titulo-form").textContent = "Editar usuario";
+    form.elements.runOriginal.value = usuarioExistente.run;
+    form.elements.run.value = usuarioExistente.run;
+    form.elements.tipoUsuario.value = usuarioExistente.tipoUsuario;
+    form.elements.nombre.value = usuarioExistente.nombre;
+    form.elements.apellidos.value = usuarioExistente.apellidos;
+    form.elements.correo.value = usuarioExistente.correo;
+    form.elements.fechaNacimiento.value = usuarioExistente.fechaNacimiento || "";
+    form.elements.direccion.value = usuarioExistente.direccion;
+  }
+
+  function runYaExiste(run) {
+    const lista = obtenerUsuariosAdmin();
+    const original = form.elements.runOriginal.value;
+    const limpio = run.trim().toUpperCase();
+    if (limpio === original) {
+      return false;
+    }
+    for (let i = 0; i < lista.length; i++) {
+      if (lista[i].run === limpio) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function validarRun() {
+    const v = form.elements.run.value;
+    if (v.trim() === "") {
+      mostrarError(form.elements.run, "Este campo es obligatorio.");
+      return false;
+    }
+    if (!esRunValido(v)) {
+      mostrarError(form.elements.run, "El RUN ingresado no es válido (sin puntos ni guion, ej: 19011022K).");
+      return false;
+    }
+    if (runYaExiste(v)) {
+      mostrarError(form.elements.run, "Ya existe un usuario con ese RUN.");
+      return false;
+    }
+    limpiarError(form.elements.run);
+    return true;
+  }
+
+  function validarTipoUsuario() {
+    if (form.elements.tipoUsuario.value === "") {
+      mostrarError(form.elements.tipoUsuario, "Selecciona el perfil del usuario.");
+      return false;
+    }
+    limpiarError(form.elements.tipoUsuario);
+    return true;
+  }
+
+  function validarNombreUsuario() {
+    if (form.elements.nombre.value.trim() === "") {
+      mostrarError(form.elements.nombre, "Este campo es obligatorio.");
+      return false;
+    }
+    limpiarError(form.elements.nombre);
+    return true;
+  }
+
+  function validarApellidos() {
+    if (form.elements.apellidos.value.trim() === "") {
+      mostrarError(form.elements.apellidos, "Este campo es obligatorio.");
+      return false;
+    }
+    limpiarError(form.elements.apellidos);
+    return true;
+  }
+
+  function validarCorreoUsuario() {
+    const v = form.elements.correo.value;
+    if (v.trim() === "") {
+      mostrarError(form.elements.correo, "Este campo es obligatorio.");
+      return false;
+    }
+    if (!esCorreoPermitido(v)) {
+      mostrarError(form.elements.correo, "Usa un correo @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+      return false;
+    }
+    limpiarError(form.elements.correo);
+    return true;
+  }
+
+  function validarRegionUsuario() {
+    if (form.elements.region.value === "") {
+      mostrarError(form.elements.region, "Selecciona la región.");
+      return false;
+    }
+    limpiarError(form.elements.region);
+    return true;
+  }
+
+  function validarComunaUsuario() {
+    if (form.elements.comuna.value === "") {
+      mostrarError(form.elements.comuna, "Selecciona la comuna.");
+      return false;
+    }
+    limpiarError(form.elements.comuna);
+    return true;
+  }
+
+  function validarDireccionUsuario() {
+    if (form.elements.direccion.value.trim() === "") {
+      mostrarError(form.elements.direccion, "La dirección es obligatoria para el despacho.");
+      return false;
+    }
+    limpiarError(form.elements.direccion);
+    return true;
+  }
+
+  form.elements.run.addEventListener("blur", validarRun);
+  form.elements.tipoUsuario.addEventListener("change", validarTipoUsuario);
+  form.elements.nombre.addEventListener("blur", validarNombreUsuario);
+  form.elements.apellidos.addEventListener("blur", validarApellidos);
+  form.elements.correo.addEventListener("blur", validarCorreoUsuario);
+  form.elements.region.addEventListener("change", validarRegionUsuario);
+  form.elements.comuna.addEventListener("change", validarComunaUsuario);
+  form.elements.direccion.addEventListener("blur", validarDireccionUsuario);
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let ok = true;
+    if (!validarRun()) ok = false;
+    if (!validarTipoUsuario()) ok = false;
+    if (!validarNombreUsuario()) ok = false;
+    if (!validarApellidos()) ok = false;
+    if (!validarCorreoUsuario()) ok = false;
+    if (!validarRegionUsuario()) ok = false;
+    if (!validarComunaUsuario()) ok = false;
+    if (!validarDireccionUsuario()) ok = false;
+
+    if (!ok) {
+      mostrarFeedback(form, false);
+      return;
+    }
+
+    const datos = {
+      run: form.elements.run.value.trim().toUpperCase(),
+      tipoUsuario: form.elements.tipoUsuario.value,
+      nombre: form.elements.nombre.value.trim(),
+      apellidos: form.elements.apellidos.value.trim(),
+      correo: form.elements.correo.value.trim(),
+      fechaNacimiento: form.elements.fechaNacimiento.value,
+      region: form.elements.region.value,
+      comuna: form.elements.comuna.value,
+      direccion: form.elements.direccion.value.trim()
+    };
+
+    const lista = obtenerUsuariosAdmin();
+    const original = form.elements.runOriginal.value;
+    if (esEdicion && original) {
+      for (let i = 0; i < lista.length; i++) {
+        if (lista[i].run === original) {
+          lista[i] = datos;
+          break;
+        }
+      }
+    } else {
+      lista.push(datos);
+    }
+    guardarUsuariosAdmin(lista);
+    mostrarFeedback(form, true);
+    setTimeout(function () { location.href = "usuarios.html"; }, 900);
+  });
+</script>
+</body>
+</html>
