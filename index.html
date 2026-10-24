@@ -30,26 +30,18 @@
     <a href="login.html">Iniciar sesión</a> | <a href="registro.html">Registrar usuario</a>
   </div>
 
-  <section class="hero">
-    <div class="container">
-      <div class="hero-copy">
-        <span class="eyebrow">Tienda online</span>
-        <h1>Ilumina cada rincón de tu hogar</h1>
-        <p>Lámparas inteligentes, iluminación LED minimalista y objetos decorativos, pensados por diseñadores para arquitectos, decoradores y amantes del buen diseño.</p>
-        <a href="productos.html" class="btn btn-primary">Ver productos</a>
-      </div>
-      <div id="hero-img"></div>
-    </div>
-  </section>
+  <div id="contenedor-portada"></div>
 
   <div class="container">
     <div class="section-title"><h2>Explora por categoría</h2></div>
+    
     <div class="category-strip" id="category-strip"></div>
 
     <div class="section-title">
       <h2>Productos destacados</h2>
       <a href="productos.html">Ver todo el catálogo →</a>
     </div>
+
     <div class="product-grid" id="grid-destacados"></div>
   </div>
 </main>
@@ -89,26 +81,8 @@
   <div class="footer-bottom">© 2026 Lumina Home.</div>
 </footer>
 
-<script src="js/datos.js"></script>
-<script src="js/tienda.js"></script>
-<script>
-  document.getElementById("hero-img").outerHTML = phImg("hero", "ratio-4-3");
-
-  let htmlCategorias = "";
-  for (let i = 0; i < CATEGORIAS.length; i++) {
-    const c = CATEGORIAS[i];
-    htmlCategorias += '<a class="category-card" href="productos.html?cat=' + c.id + '">';
-    htmlCategorias += phImg(c.id, "ratio-4-3");
-    htmlCategorias += c.nombre + '</a>';
-  }
-  document.getElementById("category-strip").innerHTML = htmlCategorias;
-
-  const destacados = [];
-  for (let i = 0; i < PRODUCTOS.length && i < 8; i++) {
-    destacados.push(PRODUCTOS[i]);
-  }
-  renderGrid("grid-destacados", destacados);
-</script>
+<script src="/js/datos.js"></script>
+<script src="/js/tienda.js"></script>
+<script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
-

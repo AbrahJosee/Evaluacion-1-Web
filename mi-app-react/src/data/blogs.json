@@ -1,0 +1,29 @@
+[
+  {
+    "imagen": "/img/blog 1.jpg",
+    "id": "temperatura-luz-descanso",
+    "titulo": "Cómo la temperatura de luz afecta tu descanso diario",
+    "resumen": "La luz cálida o fría de tus lámparas influye directamente en tu ritmo circadiano y en la calidad de tu sueño. Te contamos cómo elegirla bien.",
+    "cuerpo": [
+      "La temperatura de color de una ampolleta se mide en grados Kelvin (K) y determina si la luz se percibe cálida, neutra o fría. Este factor, muchas veces ignorado al decorar, tiene un impacto directo en nuestro reloj biológico.",
+      "Las luces cálidas (2700K–3000K) imitan el tono anaranjado del atardecer y favorecen la producción de melatonina, la hormona del sueño. Por eso son ideales para dormitorios, veladores y livings donde se busca relajación en la noche.",
+      "Las luces neutras (3500K–4500K) equilibran calidez y claridad, y funcionan bien en cocinas o zonas de trabajo donde se necesita buena visibilidad sin perder confort visual.",
+      "Las luces frías (5000K en adelante) simulan la luz del mediodía y estimulan el estado de alerta. Son útiles en oficinas o talleres, pero se recomienda evitarlas un par de horas antes de dormir.",
+      "En Lumina Home recomendamos combinar distintas temperaturas según el momento del día: usa iluminación smart regulable para pasar de una luz activa durante el día a una cálida y tenue en la noche, cuidando así tu descanso de forma automática."
+    ]
+  },
+  {
+    "imagen": "/img/blog 2.jpg",
+    "id": "tendencias-iluminacion-minimalista",
+    "titulo": "Tendencias en iluminación minimalista para este año",
+    "resumen": "Líneas limpias, materiales naturales y control inteligente: así se ve la iluminación minimalista que está marcando tendencia en los hogares.",
+    "cuerpo": [
+      "El minimalismo en iluminación no significa menos luz, sino luz con intención. Este año las tendencias apuntan a piezas funcionales que también son objetos de diseño.",
+      "1. Formas geométricas simples: esferas, cilindros y líneas rectas reemplazan las estructuras recargadas, aportando orden visual a los espacios.",
+      "2. Materiales naturales: madera clara, lino, cerámica y metales mate se combinan con LEDs cálidos para lograr ambientes acogedores sin perder sobriedad.",
+      "3. Iluminación por capas: en vez de un solo punto de luz central, se recomienda combinar luz general, de acento y de tarea, todas controlables de forma independiente.",
+      "4. Control inteligente integrado: paneles y ampolletas smart permiten ajustar intensidad y color desde el celular, adaptando la atmósfera sin agregar más objetos visibles.",
+      "5. Exteriores con la misma sobriedad: faroles y guirnaldas de líneas simples extienden el lenguaje minimalista del interior hacia patios y terrazas."
+    ]
+  }
+]
