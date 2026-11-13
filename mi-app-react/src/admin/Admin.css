@@ -1,0 +1,80 @@
+.admin-body {
+  background: #f4f1ea;
+}
+
+.admin-sidebar {
+  width: 250px;
+  flex: none;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: var(--oscuro);
+}
+
+.admin-sidebar .brand {
+  color: #fff;
+}
+
+.admin-sidebar .nav-pills {
+  --bs-nav-link-color: #c7bca8;
+  --bs-nav-link-hover-color: #fff;
+  --bs-nav-pills-link-active-bg: #3a3126;
+  --bs-nav-pills-link-active-color: #fff;
+  --bs-nav-pills-border-radius: 8px;
+}
+
+.admin-sidebar .nav-link {
+  color: #c7bca8;
+}
+
+.admin-sidebar .nav-link:hover {
+  color: #fff;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex: none;
+}
+
+.row-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  flex: none;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.admin-search {
+  max-width: 300px;
+}
+
+.admin-table {
+  --bs-table-hover-bg: #fbf9f4;
+}
+
+.admin-table thead th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  background: #faf7f1;
+}

@@ -1,0 +1,39 @@
+.filtros-panel {
+  top: 6rem;
+}
+
+.filtros {
+  --bs-list-group-active-bg: var(--text);
+  --bs-list-group-active-border-color: var(--text);
+  --bs-list-group-action-hover-bg: var(--surface-soft);
+}
+
+.filtros .list-group-item {
+  border-radius: 8px;
+  border: 0;
+  font-weight: 500;
+}
+
+.form-range::-webkit-slider-thumb {
+  background: var(--accent);
+}
+
+.form-range::-moz-range-thumb {
+  background: var(--accent);
+}
+
+.form-range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 0.25rem rgba(199, 151, 63, 0.25);
+}
+
+.chip-filtro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.6rem 0.4rem 0.8rem;
+}
+
+.chip-filtro .btn-close {
+  font-size: 0.55rem;
+}
